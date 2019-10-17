@@ -144,9 +144,9 @@ output = processor.run_uproot_job(samples,
                                   executor_args={'workers': 4},
                                   chunksize=500000,
                                  )
-save(output, '{}/genstuff.coffea'.format(args.name))
+save(output, 'genstuff.coffea')
 
-output = load("{}/genstuff.coffea".format(args.name))
+output = load("genstuff.coffea")
 
 #hmass = output["hmass"]
 #bin_contents = hmass.values()[('ZPrimeToQQ_DMsimp_HT400_M50',)]
@@ -165,4 +165,4 @@ for hname, axisname in [("hmass", "mass"), ("hpt", "pt")]:
     fig, ax = plt.subplots()
     edges = output[hname].axis(axisname).edges()
     ax.step(x=edges[:], y=hists[args.name][0])
-    fig.savefig("{}/{}.png".format(args.name, axisname))
+    fig.savefig("{}.png".format(axisname))
