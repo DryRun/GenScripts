@@ -37,12 +37,12 @@ fi
 mkdir $NAME
 cd $NAME
 source /cvmfs/cms.cern.ch/cmsset_default.sh
-if [ -r CMSSW_10_2_16_patch1/src ] ; then 
-	echo release CMSSW_10_2_16_patch1 already exists
+if [ -r CMSSW_10_2_16_UL/src ] ; then 
+	echo release CMSSW_10_2_16_UL already exists
 else
-	scram p CMSSW CMSSW_10_2_16_patch1
+	scram p CMSSW CMSSW_10_2_16_UL
 fi
-cd CMSSW_10_2_16_patch1/src
+cd CMSSW_10_2_16_UL/src
 eval `scram runtime -sh`
 
 # Make fragment
