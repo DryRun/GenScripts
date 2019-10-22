@@ -95,14 +95,12 @@ genfilter = cms.EDFilter(
         '(pdgId==55)',
         'pt>300.',
         'isLastCopy()',
-        'isPromptFinalState()',
-        'fromHardProcessFinalState()',
     ]))
 )
 gencount = cms.EDFilter(
     "CandViewCountFilter",
     src = cms.InputTag("genfilter"),
-    minNumber = cms.uint32(4)
+    minNumber = cms.uint32(1)
 )
 
 ProductionFilterSequence = cms.Sequence(
