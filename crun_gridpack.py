@@ -27,7 +27,7 @@ if __name__ == "__main__":
 	# For args.outEOS, make sure it's formatted correctly
 	if args.outEOS:
 		if args.outEOS[:6] != "/store":
-			raise ValueError("Argumnet --outEOS must start with /store")
+			raise ValueError("Argument --outEOS must start with /store")
 
 	# Create and move to working directory
 	if os.path.isdir(args.name):
@@ -72,7 +72,9 @@ if __name__ == "__main__":
 		run_script.write("pwd\n")
 
 	files_to_transfer = [gridpack_abspath, "/afs/cern.ch/user/d/dryu/DAZSLE/gen/scripts/run_gridpack.sh"]
-	csub_command = "csub run.sh -t tomorrow -F {} --queue_n {}".format(",".join(files_to_transfer), args.njobs) # --os SLCern6
+	csub_command = "csub run.sh -t tomorrow -F {} --queue_n {}".format(",".join(files_to_transfer), args.njobs) # 
+	if "slc6" in args.gridpack:
+		csub_command.append(" --os SLCern6")
 	os.system(csub_command)
 
 	os.chdir(cwd)
