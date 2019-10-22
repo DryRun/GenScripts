@@ -6,12 +6,11 @@ import sys
 import argparse
 parser = argparse.ArgumentParser(description="Make GEN plots from NanoAOD")
 parser.add_argument("files", type=str, nargs="+", help="File(s) to process")
-parser.add_argument("--name", type=str, help="Sample name (=output folder name)")
 args = parser.parse_args()
 
 #if os.path.isdir(args.name):
 #    raise ValueError("Output directory {} already exists.".format(args.name))
-os.system("mkdir -pv {}".format(args.name))
+#os.system("mkdir -pv {}".format(args.name))
 
 import json
 import uproot
@@ -133,7 +132,7 @@ class GenVisualizer(processor.ProcessorABC):
     def postprocess(self, accumulator):
         return accumulator
 
-samples = {args.name:args.files}
+samples = {"default":args.files}
 #with open('files_prev.json') as fin:
 #    samples = json.load(fin)
 
@@ -164,5 +163,5 @@ for hname, axisname in [("hmass", "mass"), ("hpt", "pt")]:
     hists = {k[0]: v for k,v in output[hname].values(sumw2=True, overflow='over').items()}
     fig, ax = plt.subplots()
     edges = output[hname].axis(axisname).edges()
-    ax.step(x=edges[:], y=hists[args.name][0])
+    ax.step(x=edges[:], y=hists["default"][0])
     fig.savefig("{}.png".format(axisname))
